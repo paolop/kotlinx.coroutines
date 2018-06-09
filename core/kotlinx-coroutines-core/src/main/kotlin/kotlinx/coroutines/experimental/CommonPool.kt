@@ -27,7 +27,7 @@ import kotlin.coroutines.experimental.*
  * If there isn't a SecurityManager present it uses [java.util.concurrent.ForkJoinPool] when available, which implements
  * efficient work-stealing algorithm for its queues, so every coroutine resumption is dispatched as a separate task even
  * when it already executes inside the pool. When available, it wraps `ForkJoinPool.commonPool` and provides a similar
- * shared pool where not.
+ * shared pool.
  * 
  * If there is a SecurityManager present (as would be if running inside a Java Web Start context) then a plain thread
  * pool is created. This is to work around the fact that ForkJoinPool creates threads that cannot perform
@@ -39,7 +39,7 @@ object CommonPool : CoroutineDispatcher() {
      * Name of the property that controls default parallelism level of [CommonPool].
      * If the property is not specified, `Runtime.getRuntime().availableProcessors() - 1` will be used instead (or `1` for single-core JVM).
      * Note that until Java 10, if an application is run within a container,
-     * `Runtime.getRuntime().availableProcessors()` is not aware of container constraints and will return real number of cores.
+     * `Runtime.getRuntime().availableProcessors()` is not aware of container constraints and will return the real number of cores.
      */
     public const val DEFAULT_PARALLELISM_PROPERTY_NAME = "kotlinx.coroutines.default.parallelism"
 
